@@ -8,17 +8,19 @@ The project consists of a Flask application that serves as an API for loading CS
 ## Installation
 To install the required dependencies, run the following command:
 
+pip install -r requirements.txt
 
 ## Usage
 To start the Flask application, run the following command:
 
 python app.py
 
-This will start the Flask development server, and the API endpoints will be accessible at http://localhost:5000.
+This will start the Flask development server, and the API endpoints will be accessible at 
+http://localhost:5000.
 
 ## Endpoints
-/load_data: POST endpoint to load CSV data into MongoDB.
-/: home page
+/load_data: POST endpoint to load CSV data into MongoDB database.
+/: On home page you can the ML model evaluation result and s3 file location, csv_file_location
 
 ## Project Structure
 The project structure is organized as follows:
@@ -35,6 +37,5 @@ The project structure is organized as follows:
 ## Dependencies
 
 The project dependencies are listed in the requirements.txt file. You can install them using pip:
-
 
 pip install -r requirements.txt
