@@ -3,7 +3,7 @@ import boto3
 import joblib
 import pandas as pd
 import config
-from flask import Flask, jsonify, Response
+from flask import Flask, jsonify, Response, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_pymongo import PyMongo
 from MLmodel import rf_pipeline, mse
@@ -12,6 +12,7 @@ from MLmodel import rf_pipeline, mse
 app = Flask(__name__)
 
 app.config["MONGO_URI"] = config.MONGO_URI
+app.secret_key = config.SECRET_KEY
 
 mongo = PyMongo(app)
 
@@ -47,7 +48,10 @@ def load_data():
 
 @app.route('/')
 def home():
-    return jsonify({"message": "Hello! Welcome to home page."})
+    meta_data_collection = mongo.db.Project_Metadata
+    project_metadata = meta_data_collection.find_one()
+
+    return render_template('index.html', project_metadata=project_metadata)
 
 def main():
     s3_model_location = upload_model_to_AWS(rf_pipeline)
